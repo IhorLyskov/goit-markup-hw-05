@@ -19,6 +19,9 @@
   --border-color: #eeeeee;
   --logo-color: #AFB1B8;
   --join-bg-color: rgba(255, 255, 255, 0.1);
+  --modal-color: #ffffff;
+  --time: 250ms;
+  --function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .visually-hidden {
@@ -107,6 +110,8 @@ img {
 }
 
 .site-nav .link {
+  transition: color var(--time) var(--function);
+
   padding-top: 32px;
   padding-bottom: 32px;
 
@@ -150,6 +155,8 @@ img {
 }
 
 .auth-tel {
+  transition: color var(--time) var(--function);
+
   display: flex;
   align-items:center;
 
@@ -316,6 +323,10 @@ img {
 }
 
 .work-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   position: absolute;
   left: 0;
   bottom: 0;
@@ -325,8 +336,6 @@ img {
 }
 
 .work-text {
-  padding-top: 27px;
-  margin: 0 auto;
   font-size: 14px;
   line-height: 1.14;
   text-align: center;
@@ -395,12 +404,13 @@ img {
   align-items: center;
 }
 
-
 .team-soc-item+.team-soc-item {
   margin-left: 10px;
 }
 
 .team-soc-link {
+  transition: fill var(--time) var(--function), background-color var(--time) var(--function);
+  
   width: 44px;
   height: 44px;
   background-color: var(--team-card-color);
@@ -411,13 +421,10 @@ img {
   fill: var(--logo-color);
 }
 
-.team-soc-icon:hover,
 .team-soc-link:hover,
-.team-soc-icon:focus,
 .team-soc-link:focus {
   background-color: var(--accent-color);
   fill: var(--team-card-color);
-  color: var(--team-card-color);
 }
 
 
@@ -430,6 +437,8 @@ img {
 }
 
 .client-link {
+  transition: border var(--time) var(--function), fill var(--time) var(--function);
+  
   display: block;
   width: 170px;
   height: 92px;
@@ -489,6 +498,8 @@ img {
 }
 
 .footer-tel {
+  transition: color var(--time) var(--function);
+  
   margin-top: 9px;
 
   display: block;
@@ -533,6 +544,8 @@ img {
 }
 
 .join-soc-link {
+  transition: background-color var(--time) var(--function);
+  
   width: 44px;
   height: 44px;
   background-color: var(--join-bg-color);
@@ -543,12 +556,11 @@ img {
   fill: var(--footer-addr-color);
 }
 
-.join-soc-icon:hover,
 .join-soc-link:hover,
-.join-soc-icon:focus,
 .join-soc-link:focus {
   background-color: var(--accent-color);
 }
+
 /* ---------------------PORTFOLIO--------------------- */
 
 .filters {
@@ -563,6 +575,8 @@ img {
 }
 
 .filter-item .btn {
+  transition: color var(--time) var(--function), background-color var(--time) var(--function), box-shadow var(--time) var(--function);
+  
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -579,6 +593,7 @@ img {
   cursor: pointer;
   color: var(--title-color);
   background-color: var(--btn-bg-color);
+  box-shadow: none;
 }
 
 .filter-item .btn:hover,
@@ -598,38 +613,41 @@ img {
   margin: 0 0 94px 0;
 }
 
-.projects .item {
+.project-item {
+  box-shadow: none;
+  transition: box-shadow 250ms var(--function);
+
   width: calc((100% - 60px) / 3);
   margin: 0;
   border: 1px solid var(--border-color);
 }
 
-.projects .item:not(:nth-child(3n)) {
+.project-item:not(:nth-child(3n)) {
   margin-right: 30px;
 }
 
-.projects .item:not(:nth-last-child(-n + 3)) {
+.project-item:not(:nth-last-child(-n + 3)) {
   margin-bottom: 30px;
 }
 
-.projects .thumb {
+.project-thumb {
   position: relative;
   overflow: hidden;
 }
 
-.thumb .overlay {
+.project-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(33, 150, 243, 0.9);
-
+  
   transform: translateY(101%);
-  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform var(--time) var(--function);
 }
 
-.overlay .text {
+.project-text {
   margin: 0 auto;
   padding: 63px 23px;
   color: var(--main-bg-color);
@@ -642,7 +660,7 @@ img {
   padding: 20px 24px;
 }
 
-.project-data .title {
+.project-data-title {
   margin: 0;
   font-size: 18px;
   line-height: 2;
@@ -650,7 +668,7 @@ img {
   color: var(--title-color);
 }
 
-.project-data .text {
+.project-data-text {
   margin: 4px 0 0 0;
 
   font-size: 16px;
@@ -658,12 +676,70 @@ img {
   letter-spacing: 0.03em;
 }
 
-.projects .item:hover {
+.project-item:hover {
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12),
   0px 4px 4px rgba(0, 0, 0, 0.06),
   1px 4px 6px rgba(0, 0, 0, 0.16);
 }
 
-.projects .item:hover .overlay {
+.project-item:hover .project-overlay {
   transform: translateY(0);
 }
+
+/* Модальное окно */
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  visibility: visible;
+  transition: opacity var(--time) var(--function), 
+  visibility var(--time) var(--function);
+}
+
+.backdrop.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.backdrop.is-hidden .modal {
+  transform: translate(-50%, -50%) scale(0.8);
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  min-width: 528px;
+  min-height: 581px;
+  background-color: var(--modal-color);
+  
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12),
+  0px 1px 1px rgba(0, 0, 0, 0.14),
+  0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform var(--time) var(--function);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
